@@ -49,3 +49,4 @@ ARCHITECTURE logicFunction OF gateXor2 IS
 BEGIN
   y <= x1 XOR x2;
 END logicFunction;
+

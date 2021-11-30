@@ -47,8 +47,8 @@ signal s_matrix_and : std_logic_vector(10 downto 0);
 
 
 begin
---general note: y1,    y2,    y3,    y4,    y5,    y6,   y7,   y8,   y9,   y10,  y11,  y12,  y13,  y14,  y15
---              y(14), y(13), y(12), y(11), y(10), y(9), y(8), y(7), y(6), y(5), y(4), y(3), y(2), y(1), y(0)
+-- y1,    y2,    y3,    y4,    y5,    y6,   y7,   y8,   y9,   y10,  y11,  y12,  y13,  y14,  y15
+-- y(14), y(13), y(12), y(11), y(10), y(9), y(8), y(7), y(6), y(5), y(4), y(3), y(2), y(1), y(0)
 
 -- p1: y1 ⊕ y2 ⊕ y3 ⊕ y7 ⊕ y8 ⊕ y9 ⊕ y11 ⊕ y12
 xor1a: gateXor2 	port map (y(14), y(13), s_xor_a(0)); 			
@@ -117,7 +117,7 @@ last_xor_6: 	gateXor2 port map (y(9), s_and(5), p(5));
 last_xor_7: 	gateXor2 port map (y(8), s_and(6), p(4));
 last_xor_8: 	gateXor2 port map (y(7), s_and(7), p(3));
 last_xor_9: 	gateXor2 port map (y(6), s_and(8), p(2));
-last_xor_10:     gateXor2 port map (y(5), s_and(9), p(1));
-last_xor_11:     gateXor2 port map (y(4), s_and(10), p(0));
+last_xor_10:    gateXor2 port map (y(5), s_and(9), p(1));
+last_xor_11:    gateXor2 port map (y(4), s_and(10), p(0));
 
 end structural;
