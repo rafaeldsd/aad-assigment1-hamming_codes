@@ -31,60 +31,57 @@ end component;
 
 -- parity check
 
-signal s_xor_a: std_logic_vector(5 downto 0);
+signal s_xor_a: std_logic_vector(2 downto 0);
 signal s_xnor_a: std_logic;
 
-signal s_xor_b: std_logic_vector(5 downto 0);
+signal s_xor_b: std_logic_vector(2 downto 0);
 signal s_xnor_b: std_logic;
 
-signal s_xor_c: std_logic_vector(5 downto 0);
+signal s_xor_c: std_logic_vector(2 downto 0);
 signal s_xnor_c: std_logic;
 
-signal s_xor_d: std_logic_vector(5 downto 0);
+signal s_xor_d: std_logic_vector(2 downto 0);
 signal s_xnor_d: std_logic;
 
 signal s_matrix_and : std_logic_vector(10 downto 0);
 
+signal s_a : std_logic;
+signal s_b : std_logic;
+
 
 begin
+
+s_a <= y(14) XOR y(8) XOR y(7) XOR y(4);
+s_b <= y(9) XOR y(6) XOR y(5) XOR y(4);
+
+
+
 -- y1,    y2,    y3,    y4,    y5,    y6,   y7,   y8,   y9,   y10,  y11,  y12,  y13,  y14,  y15
 -- y(14), y(13), y(12), y(11), y(10), y(9), y(8), y(7), y(6), y(5), y(4), y(3), y(2), y(1), y(0)
 
 -- p1: y1 ⊕ y2 ⊕ y3 ⊕ y7 ⊕ y8 ⊕ y9 ⊕ y11 ⊕ y12
-xor1a: gateXor2 	port map (y(14), y(13), s_xor_a(0)); 			
+xor1a: gateXor2 	port map (s_a, y(13), s_xor_a(0)); 			
 xor2a: gateXor2 	port map (s_xor_a(0), y(12), s_xor_a(1)); 	
-xor3a: gateXor2 	port map (s_xor_a(1), y(8), s_xor_a(2)); 
-xor4a: gateXor2 	port map (s_xor_a(2), y(7), s_xor_a(3)); 
-xor5a: gateXor2 	port map (s_xor_a(3), y(6), s_xor_a(4)); 	
-xor6a: gateXor2 	port map (s_xor_a(4), y(4), s_xor_a(5)); 
-xnora: gateXnor2        port map (s_xor_a(5), y(3), s_xnor_a); 
+xor3a: gateXor2 	port map (s_xor_a(1), y(6), s_xor_a(2)); 	
+xnora: gateXnor2        port map (s_xor_a(2), y(3), s_xnor_a); 
     
 -- p2: y1 ⊕ y4 ⊕ y5 ⊕ y7 ⊕ y8 ⊕ y10 ⊕ y11 ⊕ y13
-xor1b: gateXor2 	port map (y(14), y(11), s_xor_b(0)); 			
+xor1b: gateXor2 	port map (s_a, y(11), s_xor_b(0)); 			
 xor2b: gateXor2 	port map (s_xor_b(0), y(10), s_xor_b(1)); 	
-xor3b: gateXor2 	port map (s_xor_b(1), y(8), s_xor_b(2)); 
-xor4b: gateXor2 	port map (s_xor_b(2), y(7), s_xor_b(3)); 
-xor5b: gateXor2 	port map (s_xor_b(3), y(5), s_xor_b(4)); 	
-xor6b: gateXor2 	port map (s_xor_b(4), y(4), s_xor_b(5)); 
-xnorb: gateXnor2        port map (s_xor_b(5), y(2), s_xnor_b);
+xor3b: gateXor2 	port map (s_xor_b(1), y(5), s_xor_b(2)); 	
+xnorb: gateXnor2        port map (s_xor_b(2), y(2), s_xnor_b);
 
 -- p3: y2 ⊕ y4 ⊕ y6 ⊕ y7 ⊕ y9 ⊕ y10 ⊕ y11 ⊕ y14
-xor1c: gateXor2 	port map (y(13), y(11), s_xor_c(0)); 			
-xor2c: gateXor2 	port map (s_xor_c(0), y(9), s_xor_c(1)); 	
+xor1c: gateXor2 	port map (s_b, y(13), s_xor_c(0)); 			
+xor2c: gateXor2 	port map (s_xorc(0), y(11), s_xor_c(1)); 			
 xor3c: gateXor2 	port map (s_xor_c(1), y(8), s_xor_c(2)); 
-xor4c: gateXor2 	port map (s_xor_c(2), y(6), s_xor_c(3)); 
-xor5c: gateXor2 	port map (s_xor_c(3), y(5), s_xor_c(4)); 	
-xor6c: gateXor2 	port map (s_xor_c(4), y(4), s_xor_c(5)); 
-xnorc: gateXnor2        port map (s_xor_c(5), y(1), s_xnor_c);
+xnorc: gateXnor2        port map (s_xor_c(2), y(1), s_xnor_c);
 
 -- p4: y3 ⊕ y5 ⊕ y6 ⊕ y8 ⊕ y9 ⊕ y10 ⊕ y11 ⊕ y15
-xor1d: gateXor2 	port map (y(12), y(10), s_xor_d(0)); 			
-xor2d: gateXor2 	port map (s_xor_d(0), y(9), s_xor_d(1)); 	
+xor1d: gateXor2 	port map (s_b, y(12), s_xor_d(0)); 			
+xor2d: gateXor2 	port map (s_xor_d(0), y(10), s_xor_d(1)); 			
 xor3d: gateXor2 	port map (s_xor_d(1), y(7), s_xor_d(2)); 
-xor4d: gateXor2 	port map (s_xor_d(2), y(6), s_xor_d(3)); 
-xor5d: gateXor2 	port map (s_xor_d(3), y(5), s_xor_d(4)); 	
-xor6d: gateXor2 	port map (s_xor_d(4), y(4), s_xor_d(5)); 
-xnord: gateXnor2        port map (s_xor_d(5), y(0), s_xnor_d);
+xnord: gateXnor2        port map (s_xor_d(2), y(0), s_xnor_d);
 
 -- H matrix = || A | I4 ||  
 
