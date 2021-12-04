@@ -1,13 +1,13 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 
-ENTITY flipFlopDPET IS
+ENTITY FlipFlopD IS
   PORT (clk, D:     IN STD_LOGIC;
         nSet, nRst: IN STD_LOGIC;
         Q, nQ:      OUT STD_LOGIC);
-END flipFlopDPET;
+END FlipFlopD;
 
-ARCHITECTURE behavior OF flipFlopDPET IS
+ARCHITECTURE behavior OF FlipFlopD IS
 BEGIN
   PROCESS (clk, nSet, nRst)
   BEGIN

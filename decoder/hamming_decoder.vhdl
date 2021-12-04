@@ -51,11 +51,17 @@ signal s_b : std_logic;
 
 begin
 
-s_a <= y(14) XOR y(8) XOR y(7) XOR y(4);
-s_b <= y(9) XOR y(6) XOR y(5) XOR y(4);
+-- s_a <= y(14) XOR y(8) XOR y(7) XOR y(4);
+-- s_b <= y(9) XOR y(6) XOR y(5) XOR y(4);
 
+s_a1: gateXor2 	port map (y(14), y(8), s_a);
+s_a2: gateXor2  port map (s_a, y(7), s_a);
+s_a3: gateXor2  port map (s_a, y(4), s_a);
 
-
+s_b1: gateXor2 	port map (y(9), y(6), s_b);
+s_b2: gateXor2  port map (s_b, y(5), s_b);
+s_b3: gateXor2  port map (s_b, y(4), s_b);
+ 			
 -- y1,    y2,    y3,    y4,    y5,    y6,   y7,   y8,   y9,   y10,  y11,  y12,  y13,  y14,  y15
 -- y(14), y(13), y(12), y(11), y(10), y(9), y(8), y(7), y(6), y(5), y(4), y(3), y(2), y(1), y(0)
 
