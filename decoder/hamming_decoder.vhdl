@@ -31,17 +31,8 @@ end component;
 
 -- parity check
 
-signal s_xor_a: std_logic_vector(2 downto 0);
-signal s_xnor_a: std_logic;
-
-signal s_xor_b: std_logic_vector(2 downto 0);
-signal s_xnor_b: std_logic;
-
-signal s_xor_c: std_logic_vector(2 downto 0);
-signal s_xnor_c: std_logic;
-
-signal s_xor_d: std_logic_vector(2 downto 0);
-signal s_xnor_d: std_logic;
+signal s_xor_a, s_xor_b, s_xor_c, s_xor_d: std_logic_vector(2 downto 0);
+signal s_xnor_a, s_xnor_b, s_xnor_c, s_xnor_d: std_logic;
 
 signal s_matrix_and : std_logic_vector(10 downto 0);
 
