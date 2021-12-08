@@ -50,3 +50,28 @@ BEGIN
   y <= x1 XOR x2;
 END logicFunction;
 
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+ENTITY gateOr2 IS
+  PORT (x1, x2: IN STD_LOGIC;
+        y:      OUT STD_LOGIC);
+END gateOr2;
+
+ARCHITECTURE logicFunction OF gateOr2 IS
+BEGIN
+  y <= x1 OR x2;
+END logicFunction;
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+ENTITY gateNot IS
+  PORT (x1:		 IN STD_LOGIC;
+        y:      OUT STD_LOGIC);
+END gateNot;
+
+ARCHITECTURE logicFunction OF gateNot IS
+BEGIN
+  y <= NOT(x1);
+END logicFunction;

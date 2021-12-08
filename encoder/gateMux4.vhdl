@@ -22,6 +22,6 @@ architecture Structural of gateMux4 is
     
     mux1: gateMux2 port map (x1, x2, sel(0), s1); 				
     mux2: gateMux2 port map (x3, x4, sel(0), s2); 				
-    mux3: gateMux2 port map (s1, s2, sel(1), q);				
+    mux3: gateMux2 port map (s1, s2, sel(1), y);				
     
 end Structural;

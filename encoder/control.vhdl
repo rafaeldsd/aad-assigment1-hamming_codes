@@ -18,8 +18,8 @@ component counter is
 end component;
 
 component rom is
-  port ( a :  	in std_logic_vector(3 downto 0);
-        output: out std_logic_vector(6 downto 0)
+  port (  i :  	in std_logic_vector(3 downto 0);
+          o :   out std_logic_vector(6 downto 0)
     );
   end component;
   
@@ -27,7 +27,7 @@ component rom is
   
   begin
   
-  counter: counter port map (clk, nRst, s_counterOut); 			
+  counter1: counter port map (clk, nRst, s_counterOut); 			
   rom1: 	rom port map (s_counterOut, controlOut); 
     
   end structural;

@@ -28,7 +28,7 @@ signal s1, s2, s3: std_logic;
 
 begin
 
-not1: gateNot port map (s, s1); 				
+not1: gateNot port map (sel, s1); 				
 and1: gateAnd2 port map (x1, s1, s2);  	
 and2: gateAnd2 port map (x2, sel, s3); 		
 or1: gateOr2 port map (s2, s3, y);	

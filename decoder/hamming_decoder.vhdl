@@ -14,12 +14,6 @@ component gateXor2 is
                 x2: in 	std_logic;
                 y:	out	std_logic);
 end component;
-
-component gateXNor2 is
-	port(	x1: in 	std_logic;
-		x2: in 	std_logic;
-		y: out	std_logic);
-end component;
     
 component gateAnd4 is
         port(	x1: in std_logic;
@@ -31,8 +25,7 @@ end component;
 
 -- parity check
 
-signal s_xor_a, s_xor_b, s_xor_c, s_xor_d: std_logic_vector(2 downto 0);
-signal s_xnor_a, s_xnor_b, s_xnor_c, s_xnor_d: std_logic;
+signal s_xor_a, s_xor_b, s_xor_c, s_xor_d: std_logic_vector(3 downto 0);
 
 signal s_matrix_and : std_logic_vector(10 downto 0);
 
@@ -60,25 +53,25 @@ s_b3: gateXor2  port map (s_b(1), y(4), s_b(2));
 xor1a: gateXor2 	port map (s_a(2), y(13), s_xor_a(0)); 			
 xor2a: gateXor2 	port map (s_xor_a(0), y(12), s_xor_a(1)); 	
 xor3a: gateXor2 	port map (s_xor_a(1), y(6), s_xor_a(2)); 	
-xnora: gateXnor2        port map (s_xor_a(2), y(3), s_xnor_a); 
+xor4a: gateXor2         port map (s_xor_a(2), y(3), s_xor_a(3)); 
     
 -- p2: y1 ⊕ y4 ⊕ y5 ⊕ y7 ⊕ y8 ⊕ y10 ⊕ y11 ⊕ y13
 xor1b: gateXor2 	port map (s_a(2), y(11), s_xor_b(0)); 			
 xor2b: gateXor2 	port map (s_xor_b(0), y(10), s_xor_b(1)); 	
 xor3b: gateXor2 	port map (s_xor_b(1), y(5), s_xor_b(2)); 	
-xnorb: gateXnor2        port map (s_xor_b(2), y(2), s_xnor_b);
+xor4b: gateXor2         port map (s_xor_b(2), y(2), s_xor_b(3));
 
 -- p3: y2 ⊕ y4 ⊕ y6 ⊕ y7 ⊕ y9 ⊕ y10 ⊕ y11 ⊕ y14
 xor1c: gateXor2 	port map (s_b(2), y(13), s_xor_c(0)); 			
 xor2c: gateXor2 	port map (s_xor_c(0), y(11), s_xor_c(1)); 			
 xor3c: gateXor2 	port map (s_xor_c(1), y(8), s_xor_c(2)); 
-xnorc: gateXnor2        port map (s_xor_c(2), y(1), s_xnor_c);
+xor4c: gateXor2         port map (s_xor_c(2), y(1), s_xor_c(3));
 
 -- p4: y3 ⊕ y5 ⊕ y6 ⊕ y8 ⊕ y9 ⊕ y10 ⊕ y11 ⊕ y15
 xor1d: gateXor2 	port map (s_b(2), y(12), s_xor_d(0)); 			
 xor2d: gateXor2 	port map (s_xor_d(0), y(10), s_xor_d(1)); 			
 xor3d: gateXor2 	port map (s_xor_d(1), y(7), s_xor_d(2)); 
-xnord: gateXnor2        port map (s_xor_d(2), y(0), s_xnor_d);
+xor4d: gateXor2         port map (s_xor_d(2), y(0), s_xor_d(3));
 
 -- H matrix = || A | I4 ||  
 
@@ -87,17 +80,17 @@ xnord: gateXnor2        port map (s_xor_d(2), y(0), s_xnor_d);
 -- 0 1 0 1 0 1 1 0 1 1 1  | 0 0 1 0
 -- 0 0 1 0 1 1 0 1 1 1 1  | 0 0 0 1
 
-matrix_and1 : 	gateAnd4 port map (not s_xnor_a , not s_xnor_b  , s_xnor_c      , s_xnor_d      , s_matrix_and(0)); 	
-matrix_and2 : 	gateAnd4 port map (not s_xnor_a , s_xnor_b      , not s_xnor_c  , s_xnor_d      , s_matrix_and(1)); 	
-matrix_and3 : 	gateAnd4 port map (not s_xnor_a , s_xnor_b      , s_xnor_c      , not s_xnor_d  , s_matrix_and(2));
-matrix_and4 : 	gateAnd4 port map (s_xnor_a     , not s_xnor_b  , not s_xnor_c  , s_xnor_d      , s_matrix_and(3)); 	
-matrix_and5 : 	gateAnd4 port map (s_xnor_a     , not s_xnor_b  , s_xnor_c      , not s_xnor_d  , s_matrix_and(4));
-matrix_and6 : 	gateAnd4 port map ( s_xnor_a    , s_xnor_b      , not s_xnor_c  , not s_xnor_d  , s_matrix_and(5)); 	
-matrix_and7 : 	gateAnd4 port map (not s_xnor_a , not s_xnor_b  , not s_xnor_c  , s_xnor_d      , s_matrix_and(6)); 	
-matrix_and8 : 	gateAnd4 port map (not s_xnor_a , not s_xnor_b  , s_xnor_c      , not s_xnor_d  , s_matrix_and(7)); 	
-matrix_and9 :	gateAnd4 port map (not s_xnor_a , s_xnor_b      , not s_xnor_c  , not s_xnor_d  , s_matrix_and(8));
-matrix_and10 : 	gateAnd4 port map (s_xnor_a     , not s_xnor_b  , not s_xnor_c  , not s_xnor_d  , s_matrix_and(9));
-matrix_and11 : 	gateAnd4 port map (not s_xnor_a , not s_xnor_b  , not s_xnor_c  , not s_xnor_d  , s_matrix_and(10)); 	
+matrix_and1 : 	gateAnd4 port map (s_xor_a(3)           , s_xor_b(3)            , not s_xor_c(3)        , not s_xor_d(3)        , s_matrix_and(0)); 	
+matrix_and2 : 	gateAnd4 port map (s_xor_a(3)           , not s_xor_b(3)        , s_xor_c(3)            , not s_xor_d(3)        , s_matrix_and(1)); 	
+matrix_and3 : 	gateAnd4 port map (s_xor_a(3)           , not s_xor_b(3)        , not s_xor_c(3)        , s_xor_d(3)            , s_matrix_and(2));
+matrix_and4 : 	gateAnd4 port map (not s_xor_a(3)       , s_xor_b(3)            , s_xor_c(3)            , not s_xor_d(3)        , s_matrix_and(3)); 	
+matrix_and5 : 	gateAnd4 port map (not s_xor_a(3)       , s_xor_b(3)            , not s_xor_c(3)        , s_xor_d(3)            , s_matrix_and(4));
+matrix_and6 : 	gateAnd4 port map (not s_xor_a(3)       , not s_xor_b(3)        , s_xor_c(3)            , s_xor_d(3)            , s_matrix_and(5)); 	
+matrix_and7 : 	gateAnd4 port map (s_xor_a(3)           , s_xor_b(3)            , s_xor_c(3)            , not s_xor_d(3)        , s_matrix_and(6)); 	
+matrix_and8 : 	gateAnd4 port map (s_xor_a(3)           , s_xor_b(3)            , not s_xor_c(3)        , s_xor_d(3)            , s_matrix_and(7)); 	
+matrix_and9 :	gateAnd4 port map (s_xor_a(3)           , not s_xor_b(3)        , s_xor_c(3)            , s_xor_d(3)            , s_matrix_and(8));
+matrix_and10 : 	gateAnd4 port map (not s_xor_a(3)       , s_xor_b(3)            , s_xor_c(3)            , s_xor_d(3)            , s_matrix_and(9));
+matrix_and11 : 	gateAnd4 port map (s_xor_a(3)           , s_xor_b(3)            , s_xor_c(3)            , s_xor_d(3)            , s_matrix_and(10)); 	
 
 
 -- 1-bit error correction

@@ -6,18 +6,18 @@ entity counter is
 			nRst: in std_logic;
 			counterout: out std_logic_vector(3 downto 0));
 end counter;
-architecture structural of counter_4bit is
+architecture structural of counter is
 
 component FlipFlopD is
-	port (clk, D: IN STD_LOGIC;
-        nSet, nRst: IN STD_LOGIC;
-        Q, nQ: OUT STD_LOGIC);
+	port (	clk, D: IN STD_LOGIC;
+        	nSet, nRst: IN STD_LOGIC;
+        	Q, nQ: OUT STD_LOGIC);
 end component;
 
-signal s_Q1, S_Q2, S_Q3, S_Q4 : STD_LOGIC;
+signal S_Q1, S_Q2, S_Q3, S_Q4 : STD_LOGIC;
 begin
-	ffD1: flipFlopDSimul port map (clk,S_Q1,'1',nRst,counterout(0),s_Q1);
-	ffD2: flipFlopDSimul port map (s_Q1,S_Q2,'1',nRst,counterout(1),S_Q2);
-	ffD3: flipFlopDSimul port map (s_Q2,S_Q3,'1',nRst,counterout(2),S_Q3);
-	ffD4: flipFlopDSimul port map (s_Q3,S_Q4,'1',nRst,counterout(3),S_Q4);
+	FlipFlopD1: FlipFlopD port map (clk,S_Q1,'1',nRst,counterout(0),S_Q1);
+	FlipFlopD2: FlipFlopD port map (s_Q1,S_Q2,'1',nRst,counterout(1),S_Q2);
+	FlipFlopD3: FlipFlopD port map (s_Q2,S_Q3,'1',nRst,counterout(2),S_Q3);
+	FlipFlopD4: FlipFlopD port map (s_Q3,S_Q4,'1',nRst,counterout(3),S_Q4);
 end structural;
