@@ -6,7 +6,7 @@ USE ieee.std_logic_unsigned.all;
 ENTITY control IS
   PORT (clk:  IN STD_LOGIC;
         nRst: IN STD_LOGIC;
-        controlOut: OUT STD_LOGIC_VECTOR (6 DOWNTO 0));
+        cout: OUT STD_LOGIC_VECTOR (6 DOWNTO 0));
 END control;
 
 architecture structural of control is
@@ -28,6 +28,6 @@ component rom is
   begin
   
   counter1: counter port map (clk, nRst, s_counterOut); 			
-  rom1: 	rom port map (s_counterOut, controlOut); 
+  rom1: 	rom port map (s_counterOut, cout); 
     
   end structural;

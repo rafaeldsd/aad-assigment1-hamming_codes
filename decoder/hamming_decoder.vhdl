@@ -35,8 +35,14 @@ signal s_b : std_logic_vector(2 downto 0);
 
 begin
 
--- s_a <= y(14) XOR y(8) XOR y(7) XOR y(4);
--- s_b <= y(9) XOR y(6) XOR y(5) XOR y(4);
+-- p1: y1 ⊕ y2 ⊕ y3 ⊕ y7 ⊕ y8 ⊕ y9 ⊕ y11 ⊕ y12
+-- p2: y1 ⊕ y4 ⊕ y5 ⊕ y7 ⊕ y8 ⊕ y10 ⊕ y11 ⊕ y13
+-- p3: y2 ⊕ y4 ⊕ y6 ⊕ y7 ⊕ y9 ⊕ y10 ⊕ y11 ⊕ y14
+-- p4: y3 ⊕ y5 ⊕ y6 ⊕ y8 ⊕ y9 ⊕ y10 ⊕ y11 ⊕ y15
+
+
+-- A <= y(14) XOR y(8) XOR y(7) XOR y(4);
+-- B <= y(9) XOR y(6) XOR y(5) XOR y(4);
 
 s_a1: gateXor2 	port map (y(14), y(8), s_a(0));
 s_a2: gateXor2  port map (s_a(0), y(7), s_a(1));
@@ -49,25 +55,25 @@ s_b3: gateXor2  port map (s_b(1), y(4), s_b(2));
 -- y1,    y2,    y3,    y4,    y5,    y6,   y7,   y8,   y9,   y10,  y11,  y12,  y13,  y14,  y15
 -- y(14), y(13), y(12), y(11), y(10), y(9), y(8), y(7), y(6), y(5), y(4), y(3), y(2), y(1), y(0)
 
--- p1: y1 ⊕ y2 ⊕ y3 ⊕ y7 ⊕ y8 ⊕ y9 ⊕ y11 ⊕ y12
+-- p1: A ⊕ y2 ⊕ y3 ⊕ y9 ⊕ y12
 xor1a: gateXor2 	port map (s_a(2), y(13), s_xor_a(0)); 			
 xor2a: gateXor2 	port map (s_xor_a(0), y(12), s_xor_a(1)); 	
 xor3a: gateXor2 	port map (s_xor_a(1), y(6), s_xor_a(2)); 	
 xor4a: gateXor2         port map (s_xor_a(2), y(3), s_xor_a(3)); 
     
--- p2: y1 ⊕ y4 ⊕ y5 ⊕ y7 ⊕ y8 ⊕ y10 ⊕ y11 ⊕ y13
+-- p2: A ⊕ y4 ⊕ y5 ⊕ y10 ⊕ y13
 xor1b: gateXor2 	port map (s_a(2), y(11), s_xor_b(0)); 			
 xor2b: gateXor2 	port map (s_xor_b(0), y(10), s_xor_b(1)); 	
 xor3b: gateXor2 	port map (s_xor_b(1), y(5), s_xor_b(2)); 	
 xor4b: gateXor2         port map (s_xor_b(2), y(2), s_xor_b(3));
 
--- p3: y2 ⊕ y4 ⊕ y6 ⊕ y7 ⊕ y9 ⊕ y10 ⊕ y11 ⊕ y14
+-- p3: B ⊕ y2 ⊕ y4 ⊕ y7 ⊕ y14
 xor1c: gateXor2 	port map (s_b(2), y(13), s_xor_c(0)); 			
 xor2c: gateXor2 	port map (s_xor_c(0), y(11), s_xor_c(1)); 			
 xor3c: gateXor2 	port map (s_xor_c(1), y(8), s_xor_c(2)); 
 xor4c: gateXor2         port map (s_xor_c(2), y(1), s_xor_c(3));
 
--- p4: y3 ⊕ y5 ⊕ y6 ⊕ y8 ⊕ y9 ⊕ y10 ⊕ y11 ⊕ y15
+-- p4: B ⊕ y3 ⊕ y5 ⊕ y8 ⊕ y15
 xor1d: gateXor2 	port map (s_b(2), y(12), s_xor_d(0)); 			
 xor2d: gateXor2 	port map (s_xor_d(0), y(10), s_xor_d(1)); 			
 xor3d: gateXor2 	port map (s_xor_d(1), y(7), s_xor_d(2)); 
